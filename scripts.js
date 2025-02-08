@@ -18,11 +18,28 @@ let operator;
 // Create buttons representing each digit and operator(including =)
 const buttons = document.querySelector('#buttons');
 
-for (let i = 1; i <= 10; i++) {
+for (let i = 0; i <= 9; i++) {
   const numButton = document.createElement('button');
   numButton.textContent = i;
+  numButton.addEventListener('click', (event) => {
+    displayScreen.textContent += i;
+  });
   buttons.append(numButton);
 }
+
+const operators = ['+', '-', '*', '/'];
+operators.forEach((symbol) => {
+  const operatorButton = document.createElement('button');
+  operatorButton.textContent = symbol;
+  operatorButton.addEventListener('click', (event) => {
+    displayScreen.textContent += ' ' + symbol + ' ';
+  });
+  buttons.append(operatorButton);
+});
+
+const equalButton = document.createElement('button');
+equalButton.textContent = '=';
+buttons.append(equalButton);
 
 // Create calculator display
 const display = document.querySelector('#display');
