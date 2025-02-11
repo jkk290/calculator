@@ -11,18 +11,29 @@ let multiplication = (num1, num2) => num1 * num2;
 let division = (num1, num2) => num1 / num2;
 
 // Create 3 variables to store each part of the operation(number, operator, another number)
-let numA = 0;
-let numB = 0;
+let numA = '';
+let numB = '';
 let operator;
 
 // Create buttons representing each digit and operator(including =)
 const buttons = document.querySelector('#buttons');
 
+function updateNum(i) {
+  if (operator != undefined) {
+    numB += i.toString();
+    console.log('numB: ' + numB);
+  } else {
+    numA += i.toString();
+    console.log('numA: ' + numA);
+  }
+};
+
 for (let i = 0; i <= 9; i++) {
   const numButton = document.createElement('button');
   numButton.textContent = i;
   numButton.addEventListener('click', (event) => {
-    displayScreen.textContent += i;
+    updateNum(i);
+    updateDisplay(numA, numB);
   });
   buttons.append(numButton);
 }
@@ -32,21 +43,32 @@ operators.forEach((symbol) => {
   const operatorButton = document.createElement('button');
   operatorButton.textContent = symbol;
   operatorButton.addEventListener('click', (event) => {
-    displayScreen.textContent += ' ' + symbol + ' ';
+    operator = symbol;
+    displayScreen.textContent = numA + ' ' + operator + ' ' + numB;
+    console.log(operator);
   });
   buttons.append(operatorButton);
 });
 
 const equalButton = document.createElement('button');
 equalButton.textContent = '=';
+
+// equalButton.addEventListener('click', calculate);
 buttons.append(equalButton);
 
 // Create calculator display
 const display = document.querySelector('#display');
 const displayScreen = document.createElement('h2');
 displayScreen.style.backgroundColor = '#949a79';
-displayScreen.textContent = '10 + 2 = 12';
 display.prepend(displayScreen);
+
+function updateDisplay(numA,numB) {
+  if (operator != undefined) {
+    displayScreen.textContent = numA + ' ' + operator + ' ' + numB;
+  } else {
+    displayScreen.textContent = numA;
+  }
+};
 
 // Create clear display button
 const clearButton = document.createElement('button');
