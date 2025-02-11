@@ -53,7 +53,23 @@ operators.forEach((symbol) => {
 const equalButton = document.createElement('button');
 equalButton.textContent = '=';
 
-// equalButton.addEventListener('click', calculate);
+function calculate(numA, numB, operator) {
+  if (operator == '+') {
+    displayScreen.textContent = addition(numA, numB);
+  } else if (operator == '-') {
+    displayScreen.textContent = subtraction(numA, numB);
+  } else if (operator == '*') {
+    displayScreen.textContent = multiplication(numA, numB);
+  } else {
+    displayScreen.textContent = division(numA, numB);
+  }
+};
+
+equalButton.addEventListener('click', (event) => {
+  if ((numA != '') && (operator != undefined) && (numB != '')) {
+    calculate(parseInt(numA), parseInt(numB), operator);
+  };
+})
 buttons.append(equalButton);
 
 // Create calculator display
@@ -76,6 +92,9 @@ clearButton.textContent = 'Clear';
 
 function clearDisplay() {
   displayScreen.textContent = '';
+  numA = '';
+  numB = '';
+  operator = undefined;
 };
 
 clearButton.addEventListener('click', clearDisplay);
