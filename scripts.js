@@ -28,17 +28,23 @@ function updateNum(i) {
   }
 };
 
-for (let i = 0; i <= 9; i++) {
+for (let i = 9; i >= 0; i--) {
   const numButton = document.createElement('button');
   numButton.textContent = i;
   numButton.addEventListener('click', (event) => {
     updateNum(i);
     updateDisplay(numA, numB);
   });
+  numButton.style.width = '90px';
+  numButton.style.height = '90px';
+  numButton.style.fontSize = '50px';
+  numButton.style.margin = '5px';
   buttons.append(numButton);
 }
 
 const operators = ['+', '-', '*', '/'];
+const operatorButtons = document.querySelector('#operatorButtons');
+
 operators.forEach((symbol) => {
   const operatorButton = document.createElement('button');
   operatorButton.textContent = symbol;
@@ -46,8 +52,10 @@ operators.forEach((symbol) => {
     operator = symbol;
     displayScreen.textContent = numA + ' ' + operator + ' ' + numB;
     console.log(operator);
-  });
-  buttons.append(operatorButton);
+  });  
+  operatorButton.style.width = '70px';
+  operatorButton.style.height = '70px';
+  operatorButtons.append(operatorButton);
 });
 
 const equalButton = document.createElement('button');
@@ -70,7 +78,7 @@ equalButton.addEventListener('click', (event) => {
     calculate(parseInt(numA), parseInt(numB), operator);
   };
 })
-buttons.append(equalButton);
+operatorButtons.append(equalButton);
 
 // Create calculator display
 const display = document.querySelector('#display');
@@ -99,7 +107,7 @@ function clearDisplay() {
 
 clearButton.addEventListener('click', clearDisplay);
 
-buttons.append(clearButton);
+operatorButtons.append(clearButton);
 
 
 

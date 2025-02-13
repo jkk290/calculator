@@ -7,6 +7,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items:center;
+  background-color: silver;
+  border-radius: 30px;
+  padding: 30px;
   height: 500px;
   width: 400px;
 }
@@ -17,6 +20,7 @@ body {
   height: 75px;
   font-size: x-large;
   text-align: right;
+  margin-bottom: 10px;
 }
 
 #buttons {
