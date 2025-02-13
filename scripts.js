@@ -35,8 +35,8 @@ for (let i = 9; i >= 0; i--) {
     updateNum(i);
     updateDisplay(numA, numB);
   });
-  numButton.style.width = '90px';
-  numButton.style.height = '90px';
+  numButton.style.width = '100px';
+  numButton.style.height = '100px';
   numButton.style.fontSize = '50px';
   numButton.style.margin = '5px';
   buttons.append(numButton);
@@ -52,9 +52,9 @@ operators.forEach((symbol) => {
     operator = symbol;
     displayScreen.textContent = numA + ' ' + operator + ' ' + numB;
     console.log(operator);
-  });  
-  operatorButton.style.width = '70px';
-  operatorButton.style.height = '70px';
+  });
+  operatorButton.style.width = '60px';
+  operatorButton.style.height = '50px';
   operatorButtons.append(operatorButton);
 });
 
@@ -62,7 +62,9 @@ const equalButton = document.createElement('button');
 equalButton.textContent = '=';
 
 function calculate(numA, numB, operator) {
-  if (operator == '+') {
+  if ((numB === 0) && (operator == '/')) {
+    displayScreen.textContent = 'Haha, nice!';
+  } else if (operator == '+') {
     displayScreen.textContent = addition(numA, numB);
   } else if (operator == '-') {
     displayScreen.textContent = subtraction(numA, numB);
@@ -76,8 +78,12 @@ function calculate(numA, numB, operator) {
 equalButton.addEventListener('click', (event) => {
   if ((numA != '') && (operator != undefined) && (numB != '')) {
     calculate(parseInt(numA), parseInt(numB), operator);
+  } else {
+    displayScreen.textContent = 'Error, does not compute'
   };
 })
+equalButton.style.width = '60px';
+equalButton.style.height = '50px';
 operatorButtons.append(equalButton);
 
 // Create calculator display
@@ -106,7 +112,8 @@ function clearDisplay() {
 };
 
 clearButton.addEventListener('click', clearDisplay);
-
+clearButton.style.width = '60px';
+clearButton.style.height = '50px';
 operatorButtons.append(clearButton);
 
 
