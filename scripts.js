@@ -13,13 +13,13 @@ let division = (num1, num2) => num1 / num2;
 // Create 3 variables to store each part of the operation(number, operator, another number)
 let numA = '';
 let numB = '';
-let operator;
+let operator = null;
 
 // Create buttons representing each digit and operator(including =)
 const buttons = document.querySelector('#buttons');
 
 function updateNum(i) {
-  if (operator != undefined) {
+  if (operator != null) {
     numB += i.toString();
     console.log('numB: ' + numB);
   } else {
@@ -61,22 +61,24 @@ operators.forEach((symbol) => {
 const equalButton = document.createElement('button');
 equalButton.textContent = '=';
 
+// Create function that populates the display with clicked on digit buttons
+
 function calculate(numA, numB, operator) {
   if ((numB === 0) && (operator == '/')) {
     displayScreen.textContent = 'Haha, nice!';
   } else if (operator == '+') {
-    displayScreen.textContent = addition(numA, numB);
+    displayScreen.textContent = addition(numA, numB).toPrecision(5);
   } else if (operator == '-') {
-    displayScreen.textContent = subtraction(numA, numB);
+    displayScreen.textContent = subtraction(numA, numB).toPrecision(5);
   } else if (operator == '*') {
-    displayScreen.textContent = multiplication(numA, numB);
+    displayScreen.textContent = multiplication(numA, numB).toPrecision(5);
   } else {
-    displayScreen.textContent = division(numA, numB);
+    displayScreen.textContent = division(numA, numB).toPrecision(5);
   }
 };
 
 equalButton.addEventListener('click', (event) => {
-  if ((numA != '') && (operator != undefined) && (numB != '')) {
+  if ((numA != '') && (operator != null) && (numB != '')) {
     calculate(parseInt(numA), parseInt(numB), operator);
   } else {
     displayScreen.textContent = 'Error, does not compute'
@@ -115,8 +117,3 @@ clearButton.addEventListener('click', clearDisplay);
 clearButton.style.width = '60px';
 clearButton.style.height = '50px';
 operatorButtons.append(clearButton);
-
-
-
-
-// Create function that populates the display with clicked on digit buttons
